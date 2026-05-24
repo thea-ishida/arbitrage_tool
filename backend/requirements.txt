@@ -1,0 +1,42 @@
+# Python 3.12 required (3.14 is too new for pinned torch/numpy).
+# Setup:
+#   python3.12 -m venv .venv && source .venv/bin/activate
+#   pip install torch==2.3.0
+#   pip install torch-scatter torch-sparse -f https://data.pyg.org/whl/torch-2.3.0+cpu.html
+#   pip install -r requirements.txt
+
+# ── Core async runtime ────────────────────────────────────────────────────────
+asyncio-mqtt==0.16.2        # optional MQTT bridge (future)
+aiohttp==3.9.5              # HTTP client for REST fallbacks
+websockets==12.0            # low-level WS, used inside adapters
+
+# ── Data layer ────────────────────────────────────────────────────────────────
+numpy==1.26.4
+pandas==2.2.2
+orjson==3.10.3              # 3-5x faster than stdlib json; critical on hot path
+
+# ── GNN / ML stack ────────────────────────────────────────────────────────────
+torch==2.3.0
+torch-geometric==2.5.3
+torch-scatter==2.1.2        # compiled; version must match torch
+torch-sparse==0.6.18
+
+# ── Numerical / statistics ────────────────────────────────────────────────────
+scipy==1.13.0
+scikit-learn==1.4.2
+
+# ── Config & validation ───────────────────────────────────────────────────────
+pydantic==2.7.1
+pydantic-settings==2.2.1
+python-dotenv==1.0.1
+
+# ── Observability ─────────────────────────────────────────────────────────────
+structlog==24.1.0
+prometheus-client==0.20.0
+
+# ── Dev / testing ─────────────────────────────────────────────────────────────
+pytest==8.2.0
+pytest-asyncio==0.23.6
+pytest-benchmark==4.0.0
+mypy==1.10.0
+ruff==0.4.4

@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --navy-950:   #060D18;
+  --navy-900:   #0B192C;
+  --navy-800:   #122540;
+  --navy-700:   #1A3360;
+  --blue-600:   #1E3A8A;
+  --blue-500:   #2563EB;
+  --blue-400:   #3B82F6;
+  --blue-300:   #60A5FA;
+  --cyan-400:   #22D3EE;
+  --emerald-400:#34D399;
+  --rose-400:   #F87171;
+  --amber-400:  #FBBF24;
+}
+
+html, body {
+  background-color: var(--navy-900);
+  color: #e2e8f0;
+  height: 100%;
+}
+
+/* ── Custom scrollbar ─────────────────────────────────────────────────────── */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #1E3A8A transparent;
+}
+::-webkit-scrollbar       { width: 4px; height: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: #1E3A8A; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #2563EB; }
+
+/* ── Recharts tooltip ─────────────────────────────────────────────────────── */
+.recharts-tooltip-wrapper { outline: none !important; }
+
+/* ── Tabular numbers for financial figures ────────────────────────────────── */
+.tabular { font-variant-numeric: tabular-nums; }
+
+/* ── Card glass effect ────────────────────────────────────────────────────── */
+.card-glass {
+  background: linear-gradient(135deg, rgba(18,37,64,0.9) 0%, rgba(11,25,44,0.95) 100%);
+  border: 1px solid rgba(30,58,138,0.35);
+  backdrop-filter: blur(12px);
+}
+
+/* ── Glowing border on hover ──────────────────────────────────────────────── */
+.card-glass:hover {
+  border-color: rgba(59,130,246,0.4);
+  box-shadow: 0 0 0 1px rgba(59,130,246,0.1), 0 4px 32px rgba(6,13,24,0.7);
+}
+
+/* ── Animated price flash ─────────────────────────────────────────────────── */
+@keyframes flash-green {
+  from { background-color: rgba(52,211,153,0.2); }
+  to   { background-color: transparent; }
+}
+@keyframes flash-red {
+  from { background-color: rgba(248,113,113,0.2); }
+  to   { background-color: transparent; }
+}
+.flash-up   { animation: flash-green 0.5s ease-out; }
+.flash-down { animation: flash-red   0.5s ease-out; }
