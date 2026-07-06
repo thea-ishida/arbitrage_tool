@@ -27,6 +27,9 @@ backend/models/checkpoints/
 *.pt
 *.pth
 
+# Historical market data captures (see backend/plugins/capture.py)
+backend/data/captures/
+
 # OS
 .DS_Store
 Thumbs.db

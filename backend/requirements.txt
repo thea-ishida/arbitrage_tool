@@ -14,6 +14,7 @@ websockets==12.0            # low-level WS, used inside adapters
 numpy==1.26.4
 pandas==2.2.2
 orjson==3.10.3              # 3-5x faster than stdlib json; critical on hot path
+pyarrow==24.0.0             # Parquet writer for the historical capture plugin
 
 # ── GNN / ML stack ────────────────────────────────────────────────────────────
 torch==2.3.0
