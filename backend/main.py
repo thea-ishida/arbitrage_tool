@@ -180,8 +180,12 @@ async def _main() -> None:
     await ws_server.start()
 
     # ── Register custom plugins here ──────────────────────────────────────
-    # from backend.plugins.my_plugin import MyPlugin
-    # registry.register(MyPlugin())
+    from backend.plugins.arbitrage_detector import ArbitrageDetectorPlugin
+    from backend.plugins.metrics import ThroughputMetricsPlugin
+    from backend.plugins.capture import CapturePlugin
+    registry.register(ArbitrageDetectorPlugin())
+    registry.register(ThroughputMetricsPlugin())
+    registry.register(CapturePlugin())
     # ──────────────────────────────────────────────────────────────────────
 
     await registry.startup_all()
