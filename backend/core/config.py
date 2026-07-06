@@ -14,7 +14,10 @@ class IngestionConfig(BaseSettings):
 
     reconnect_delay_s: float = Field(1.0,  description="Base reconnect backoff (seconds)")
     reconnect_max_s:   float = Field(60.0, description="Max reconnect backoff")
-    book_depth:        int   = Field(20,   description="L2 levels to request per exchange")
+    # Kraken v2 book channel only accepts depth ∈ {10, 25, 100, 500, 1000};
+    # requesting an unsupported value (e.g. 20) gets the subscription silently
+    # rejected by Kraken, so book updates never arrive.
+    book_depth:        int   = Field(10,   description="L2 levels to request per exchange (Kraken: 10/25/100/500/1000)")
     symbols:           list[str] = Field(
         default=["BTC/USDT", "ETH/USDT"],
         description="Instruments to subscribe across all exchanges",

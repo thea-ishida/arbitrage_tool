@@ -32,6 +32,10 @@ from backend.plugins import PluginRegistry
 from backend.server import WSBroadcastServer
 
 # ── Logging ──────────────────────────────────────────────────────────────────
+# structlog only formats records emitted through structlog.get_logger(); the
+# stdlib loggers used by adapters/bus/ws_server (logging.getLogger(__name__))
+# need their own handler or they're silently dropped below WARNING.
+logging.basicConfig(level=settings.log_level, format="%(asctime)s %(name)s %(levelname)s %(message)s")
 
 structlog.configure(
     wrapper_class=structlog.make_filtering_bound_logger(
