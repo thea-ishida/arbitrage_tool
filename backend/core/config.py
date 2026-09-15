@@ -22,6 +22,12 @@ class IngestionConfig(BaseSettings):
         default=["BTC/USDT", "ETH/USDT"],
         description="Instruments to subscribe across all exchanges",
     )
+    max_quote_staleness_s: float = Field(
+        1.0,
+        description="Max allowed gap between two exchanges' quote receipt "
+                     "times for a cross-exchange comparison to count as fresh "
+                     "(see ArbitrageDetectorPlugin)",
+    )
 
 
 class ModelConfig(BaseSettings):

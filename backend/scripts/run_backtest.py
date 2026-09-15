@@ -80,7 +80,9 @@ async def _run(duration_s: float) -> None:
     events = detector.events
     print(f"\nCapture window complete: {elapsed:.1f}s elapsed, "
           f"ticks received: {tick_counts or 'none'}")
-    print(f"Crossed-book opportunities detected: {len(events)}")
+    print(f"Crossed-book opportunities detected: {len(events)}  "
+          f"(staleness-gated at {settings.ingestion.max_quote_staleness_s:.1f}s — "
+          f"{detector.n_stale_suppressed} additional crossings suppressed as stale)")
 
     if not events:
         print("\nNo crossed-book opportunities occurred during this window — "
@@ -120,6 +122,8 @@ async def _run(duration_s: float) -> None:
     print(f"Total fees (USDT):     {report.total_fees:.4f}")
     print(f"Total slippage (USDT): {report.total_slippage:.4f}")
     print(f"Max drawdown:          {report.max_drawdown:.4%}")
+    avg_staleness_ms = sum(e.quote_staleness_ms for e in events) / len(events)
+    print(f"Avg quote staleness:   {avg_staleness_ms:.1f} ms (across surviving trades)")
     print(f"Sharpe (per-trade, unannualised): {report.sharpe_ratio:.3f}  "
           f"(mean/std of net P&L across the {report.n_trades} realised trades — "
           f"not scaled to a yearly figure)")
